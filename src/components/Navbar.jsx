@@ -1,0 +1,5 @@
+import { NavLink, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useTheme } from '../context/ThemeContext';
+const links=[['Home','/'],['Shop','/products'],['Categories','/categories'],['About','/about'],['Contact','/contact']];
+export default function Navbar(){const count=useSelector(s=>s.cart.items.reduce((n,p)=>n+p.quantity,0));const {compact,toggleCompact}=useTheme();return <header className="site-header"><div className="nav-wrap"><Link className="brand" to="/"><span className="brand-mark">S</span>STYLEKART<span className="brand-dot">.</span></Link><nav className="main-nav">{links.map(([label,to])=><NavLink key={to} to={to} end={to==='/'} className={({isActive})=>isActive?'nav-link active':'nav-link'}>{label}</NavLink>)}</nav><div className="nav-actions"><button className="icon-btn theme-toggle" onClick={toggleCompact} title="Toggle compact layout" aria-label="Toggle compact layout">{compact?'A−':'A+'}</button><Link className="cart-link" to="/cart" aria-label={`Cart with ${count} items`}>Bag <span className="cart-count">{count}</span></Link></div></div></header>}

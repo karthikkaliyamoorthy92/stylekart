@@ -1,0 +1,5 @@
+import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import ProductCard from '../components/ProductCard';
+const names={tshirts:'Tees & layers',shirts:'Shirts',jeans:'Denim & trousers',shoes:'Shoes'};
+export default function CategoryDetails(){const {categoryId}=useParams();const products=useSelector(s=>s.products.items.filter(p=>p.category===categoryId));return <section className="nested-category"><Link className="back-link" to="/categories">← All categories</Link><div className="section-title-row"><div><span className="eyebrow">THE COLLECTION</span><h2>{names[categoryId]||'Category'}</h2></div><span className="muted">{products.length} styles</span></div>{products.length?<div className="product-grid">{products.map(p=><ProductCard key={p.id} product={p}/>)}</div>:<div className="empty-state"><h3>More styles coming soon</h3><p>Explore the full collection for more pieces.</p><Link className="button button-dark" to="/products">Shop all</Link></div>}</section>}

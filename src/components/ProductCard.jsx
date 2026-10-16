@@ -1,0 +1,4 @@
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../features/cart/cartSlice';
+export default function ProductCard({product}){const dispatch=useDispatch();return <article className="product-card"><Link className="product-image-wrap" to={`/products/${product.id}`}><img className="product-image" src={product.thumbnail} alt={product.title} loading="lazy"/><span className="product-tag">{product.category}</span></Link><div className="product-info"><div className="product-meta"><span>{product.brand||'StyleKart'}</span><span>★ {Number(product.rating||4.5).toFixed(1)}</span></div><Link className="product-title" to={`/products/${product.id}`}>{product.title}</Link><div className="product-bottom"><strong>₹{Number(product.price).toLocaleString('en-IN')}</strong><button className="add-btn" onClick={()=>dispatch(addToCart(product))}>Add to bag +</button></div></div></article>}
